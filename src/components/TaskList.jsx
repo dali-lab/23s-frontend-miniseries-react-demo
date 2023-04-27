@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function TaskList({ tasks, onDelete, onUpdate, toggleTask, swapTask }) {
+function TaskList({ tasks, onDelete, onUpdate, onToggle, swapTask }) {
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState('');
 
@@ -17,6 +17,10 @@ function TaskList({ tasks, onDelete, onUpdate, toggleTask, swapTask }) {
       setEditValue(tasks[editIndex].text);
     }
   }, [editIndex, tasks]);
+
+
+
+
 
   // Drag and drop callbacks
   const handleDragStart = (e, index) => {
@@ -40,7 +44,6 @@ function TaskList({ tasks, onDelete, onUpdate, toggleTask, swapTask }) {
   };
   
   // Styling logic
-
   // dragged element enters the boundaries of a valid drop target
   const handleDragEnter = (e, index) => {
     if (draggedTask !== index) {
@@ -67,7 +70,7 @@ function TaskList({ tasks, onDelete, onUpdate, toggleTask, swapTask }) {
           onDragEnter={(e) => handleDragEnter(e, index)}
           onDragLeave={(e) => handleDragLeave(e, index)}
           // Toggling
-          onClick={() => { if (editIndex !== index) toggleTask(index) }}
+          onClick={() => { if (editIndex !== index) onToggle(index) }}
           className={task.completed ? 'completed' : ''}
         >
           {editIndex === index ? (

@@ -18,10 +18,6 @@ function App() {
   };
 
   const updateTask = (newTask, index) => {
-    /* setTasks((prevTasks) => {
-      return prevTasks.map((task, i) => (i === index ? newTask : task));
-    }); */
-
     setTasks((prevTasks) => {
       return prevTasks.map((task, i) => (i === index ? { text: newTask, completed: false } : task));
     });
@@ -47,7 +43,7 @@ function App() {
     <div className="App">
       <h1>Simple To-Do List</h1>
       <TaskForm onSubmit={addTask} />
-      <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} toggleTask={toggleTask} swapTask={swapTask} />
+      <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} onToggle={toggleTask} swapTask={swapTask} />
     </div>
   );
 }
