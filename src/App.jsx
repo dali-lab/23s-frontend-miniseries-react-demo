@@ -15,10 +15,13 @@ function App() {
     setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
   };
 
-  const updateTask = (index, newTask) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task, i) => (i === index ? newTask : task))
-    );
+  const updateTask = (newTask, index) => {
+    setTasks((prevTasks) => {
+      if (Array.isArray(newTask)) {
+        return newTask;
+      }
+      return prevTasks.map((task, i) => (i === index ? newTask : task));
+    });
   };
 
   return (
