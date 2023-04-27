@@ -60,36 +60,34 @@ function TaskList({ tasks, onDelete, onUpdate, onToggle, swapTask }) {
     <ul>
       {tasks.map((task, index) => (
         <div key={index}>
-        <li 
-          key={index}
-          // Dragging
-          draggable
-          onDragStart={(e) => handleDragStart(e, index)}
-          onDragOver={(e) => handleDragOver(e, index)}
-          onDrop={(e) => handleDrop(e, index)}
-          onDragEnter={(e) => handleDragEnter(e, index)}
-          onDragLeave={(e) => handleDragLeave(e, index)}
-          // Toggling
-          onClick={() => { if (editIndex !== index) onToggle(index) }}
-          className={task.completed ? 'completed' : ''}
-        >
-          {editIndex === index ? (
-            <>
-              <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
-              <button onClick={() => handleEditSubmit(index)}>Save</button>
-            </>
-          ) : (
-            <>
-              <div className="text">{task.text}</div>
-              <div className="edit-buttons">
-                <button onClick={() => setEditIndex(index)}>Edit</button>
-                <button onClick={() => onDelete(index)}>Delete</button>
-              </div>
-            </>
-          )}
-          </li>
-            
-            {/*<Task index={index} task={task} onUpdate={onUpdate} onDelete={onDelete} toggleTask={toggleTask} swapTask={swapTask} />*/}
+          <li 
+            key={index}
+            // Dragging
+            draggable
+            onDragStart={(e) => handleDragStart(e, index)}
+            onDragOver={(e) => handleDragOver(e, index)}
+            onDrop={(e) => handleDrop(e, index)}
+            onDragEnter={(e) => handleDragEnter(e, index)}
+            onDragLeave={(e) => handleDragLeave(e, index)}
+            // Toggling
+            onClick={() => { if (editIndex !== index) onToggle(index) }}
+            className={task.completed ? 'completed' : ''}
+          >
+            {editIndex === index ? (
+              <>
+                <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+                <button onClick={() => handleEditSubmit(index)}>Save</button>
+              </>
+            ) : (
+              <>
+                <div className="text">{task.text}</div>
+                <div className="edit-buttons">
+                  <button onClick={() => setEditIndex(index)}>Edit</button>
+                  <button onClick={() => onDelete(index)}>Delete</button>
+                </div>
+              </>
+            )}
+            </li>
           </div>
       ))}
     </ul>
