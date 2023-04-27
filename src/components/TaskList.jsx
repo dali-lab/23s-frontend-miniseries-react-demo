@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function TaskList({ tasks, onDelete, onUpdate, setTasks, toggleTask }) {
+function TaskList({ tasks, onDelete, onUpdate, toggleTask, swapTask }) {
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState('');
 
@@ -18,8 +18,6 @@ function TaskList({ tasks, onDelete, onUpdate, setTasks, toggleTask }) {
     }
   }, [editIndex, tasks]);
 
-
-
   // Drag and drop callbacks
   const handleDragStart = (e, index) => {
     setDraggedTask(index);
@@ -34,9 +32,7 @@ function TaskList({ tasks, onDelete, onUpdate, setTasks, toggleTask }) {
   // dragged element is dropped onto a valid target
   const handleDrop = (e, index) => {
     if (draggedTask !== index) {
-      const updatedTasks = [...tasks];
-      updatedTasks.splice(index, 0, updatedTasks.splice(draggedTask, 1)[0]);
-      setTasks(updatedTasks);
+      swapTask(index, draggedTask);
     }
 
     setDraggedTask(null);
@@ -60,6 +56,7 @@ function TaskList({ tasks, onDelete, onUpdate, setTasks, toggleTask }) {
   return (
     <ul>
       {tasks.map((task, index) => (
+        <div key={index}>
         <li 
           key={index}
           // Dragging
@@ -87,7 +84,10 @@ function TaskList({ tasks, onDelete, onUpdate, setTasks, toggleTask }) {
               </div>
             </>
           )}
-        </li>
+          </li>
+            
+            {/*<Task index={index} task={task} onUpdate={onUpdate} onDelete={onDelete} toggleTask={toggleTask} swapTask={swapTask} />*/}
+          </div>
       ))}
     </ul>
   );

@@ -34,11 +34,19 @@ function App() {
     );
   };
 
+  const swapTask = (index, newIndex) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks];
+      updatedTasks.splice(index, 0, updatedTasks.splice(newIndex, 1)[0]);
+      return updatedTasks;
+    });
+  }
+
   return (
     <div className="App">
       <h1>Simple To-Do List</h1>
       <TaskForm onSubmit={addTask} />
-      <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} setTasks={setTasks} toggleTask={toggleTask} />
+      <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} toggleTask={toggleTask} swapTask={swapTask} />
     </div>
   );
 }
