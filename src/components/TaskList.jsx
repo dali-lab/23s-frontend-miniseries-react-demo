@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function TaskList({ tasks, onDelete, onUpdate, setTasks }) {
+function TaskList({ tasks, onDelete, onUpdate, setTasks, toggleTask }) {
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState('');
 
@@ -14,7 +14,7 @@ function TaskList({ tasks, onDelete, onUpdate, setTasks }) {
 
   useEffect(() => {
     if (editIndex !== null) {
-      setEditValue(tasks[editIndex]);
+      setEditValue(tasks[editIndex].text);
     }
   }, [editIndex, tasks]);
 
@@ -62,12 +62,16 @@ function TaskList({ tasks, onDelete, onUpdate, setTasks }) {
       {tasks.map((task, index) => (
         <li 
           key={index}
+          // Dragging
           draggable
           onDragStart={(e) => handleDragStart(e, index)}
           onDragOver={(e) => handleDragOver(e, index)}
           onDrop={(e) => handleDrop(e, index)}
           onDragEnter={(e) => handleDragEnter(e, index)}
           onDragLeave={(e) => handleDragLeave(e, index)}
+          // Toggling
+          onClick={() => { if (editIndex !== index) toggleTask(index) }}
+          className={task.completed ? 'completed' : ''}
         >
           {editIndex === index ? (
             <>
@@ -76,7 +80,7 @@ function TaskList({ tasks, onDelete, onUpdate, setTasks }) {
             </>
           ) : (
             <>
-              {task}
+              <div className="text">{task.text}</div>
               <div className="edit-buttons">
                 <button onClick={() => setEditIndex(index)}>Edit</button>
                 <button onClick={() => onDelete(index)}>Delete</button>

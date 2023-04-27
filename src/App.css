@@ -58,6 +58,8 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  cursor: pointer;
 }
 
 /* FOR EDITING */
@@ -71,4 +73,10 @@ li {
 .drag-over {
   background-color: rgba(0, 0, 255, 0.1);
   border: 1px dashed #007bff;
+}
+
+/* FOR TOGGLING */
+li.completed .text {
+  text-decoration: line-through;
+  color: #ccc;
 }
