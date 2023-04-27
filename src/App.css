@@ -35,6 +35,8 @@ button {
   background-color: #007bff;
   color: rgba(0,0,0,0.8);
   cursor: pointer;
+
+  margin-left: 5px;
 }
 
 button:hover {
@@ -50,4 +52,14 @@ ul {
 li {
   padding: 0.5rem 0;
   border-bottom: 1px solid #ccc;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-buttons {
+  min-width: 200px;
+  display: flex;
+  justify-content: flex-end;
 }

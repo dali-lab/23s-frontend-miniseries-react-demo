@@ -11,11 +11,21 @@ function App() {
     setTasks((prevTasks) => [...prevTasks, task]);
   };
 
+  const deleteTask = (index) => {
+    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
+  };
+
+  const updateTask = (index, newTask) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task, i) => (i === index ? newTask : task))
+    );
+  };
+
   return (
     <div className="App">
       <h1>Simple To-Do List</h1>
       <TaskForm onSubmit={addTask} />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} />
     </div>
   );
 }
