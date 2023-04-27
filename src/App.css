@@ -36,6 +36,7 @@ button {
   color: rgba(0,0,0,0.8);
   cursor: pointer;
 
+  /* FOR EDITING */
   margin-left: 5px;
 }
 
@@ -53,17 +54,20 @@ li {
   padding: 0.5rem 0;
   border-bottom: 1px solid #ccc;
 
+  /* FOR EDITING */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* FOR EDITING */
 .edit-buttons {
   min-width: 200px;
   display: flex;
   justify-content: flex-end;
 }
 
+/* FOR DRAG AND DROP */
 .drag-over {
   background-color: rgba(0, 0, 255, 0.1);
   border: 1px dashed #007bff;

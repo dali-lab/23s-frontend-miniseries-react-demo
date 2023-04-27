@@ -17,9 +17,6 @@ function App() {
 
   const updateTask = (newTask, index) => {
     setTasks((prevTasks) => {
-      if (Array.isArray(newTask)) {
-        return newTask;
-      }
       return prevTasks.map((task, i) => (i === index ? newTask : task));
     });
   };
@@ -28,7 +25,7 @@ function App() {
     <div className="App">
       <h1>Simple To-Do List</h1>
       <TaskForm onSubmit={addTask} />
-      <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} />
+      <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} setTasks={setTasks} />
     </div>
   );
 }

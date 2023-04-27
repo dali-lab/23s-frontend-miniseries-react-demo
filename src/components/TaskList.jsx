@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function TaskList({ tasks, onDelete, onUpdate }) {
+function TaskList({ tasks, onDelete, onUpdate, setTasks }) {
   const [editIndex, setEditIndex] = useState(null);
   const [editValue, setEditValue] = useState('');
 
@@ -36,7 +36,7 @@ function TaskList({ tasks, onDelete, onUpdate }) {
     if (draggedTask !== index) {
       const updatedTasks = [...tasks];
       updatedTasks.splice(index, 0, updatedTasks.splice(draggedTask, 1)[0]);
-      onUpdate(updatedTasks);
+      setTasks(updatedTasks);
     }
 
     setDraggedTask(null);
