@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import './App.css';
 
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
+import { TaskContext } from './Root';
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const { tasks, setTasks } = useContext(TaskContext);
 
   const addTask = (task) => {
     const newTask = { text: task, completed: false };
