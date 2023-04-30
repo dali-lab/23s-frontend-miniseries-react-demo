@@ -1,17 +1,32 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import './App.css';
 
 import TaskForm from './components/TaskForm';
 import Task from './components/Task';
 import { TaskContext } from './Root';
 
+import * as db from './services/datastore';
+
 function App() {
-  const { tasks, setTasks } = useContext(TaskContext);
-  const [ newTaskId, setNewTaskId ] = useState(0);
+  const {tasks, setTasks } = useContext(TaskContext);
+  // uncomment for realtime!
+  // const [ newTaskId, setNewTaskId ] = useState(0);
+
+  useEffect(() => {
+    db.fetchTasks((newTasks) => {
+      console.log(newTasks);
+      setTasks(newTasks);
+    });
+  }, [setTasks]);
   
+  // note: "task" here is just the text
   const addTask = (task) => {
-    setTasks((prevTasks) => ({...prevTasks, [String(newTaskId)]: { text: task, completed: false, id:  String(newTaskId)}}));
-    setNewTaskId((prevNewTaskId) => prevNewTaskId + 1);
+    // uncomment for realtime!
+    // setTasks((prevTasks) => ({...prevTasks, [String(newTaskId)]: { text: task, completed: false, id:  String(newTaskId)}}));
+    // setNewTaskId((prevNewTaskId) => prevNewTaskId + 1);
+
+    const newTask = { text: task, completed: false}; // firebase will handle the id creation
+    db.createTask(newTask);
   };
 
   const deleteTask = (index) => {
@@ -22,22 +37,26 @@ function App() {
     });
   };
 
-  const updateTask = (updatedTask, index) => {
-    setTasks((prevTasks) => ({...prevTasks, [String(index)]: updatedTask}));
+  const updateTask = (updatedTask, id) => {
+    // from realtime!
+    // setTasks((prevTasks) => ({...prevTasks, [String(index)]: updatedTask}));
+    db.updateTask(id, updatedTask);
   };
 
-  const toggleTask = (index) => {
-    if (tasks) {
-      setTasks((prevTasks) => {
-        if (prevTasks[index]) {
-          return {
-            ...prevTasks, 
-            [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
-        } 
-      } else {
-        return prevTasks;
-      }});
-    }
+  const toggleTask = (id) => {
+    // if (tasks) {
+    //   setTasks((prevTasks) => {
+    //     if (prevTasks[id]) {
+    //       return {
+    //         ...prevTasks, 
+    //         [id]: prevTasks[id] ? {...prevTasks[id], completed: !prevTasks[id].completed} : undefined,
+    //     } 
+    //   } else {
+    //     return prevTasks;
+    //   }});
+    // }
+
+    db.updateTask(id, {completed: !tasks[id].completed});
   };
 
   return (
