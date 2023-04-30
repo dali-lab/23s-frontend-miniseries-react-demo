@@ -18,7 +18,7 @@ function Task(props) {
       className={task.completed ? 'completed' : ''}
       data-index={index}
     >
-      <input type="checkbox" value={task.completed} onClick={() => { if (!isEditing) toggleTask(index) }}></input>
+      <input type="checkbox" value={task.completed} onClick={() => { if (!isEditing) toggleTask(index, !task.completed) }}></input>
       {isEditing ? (
         <>
           <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />

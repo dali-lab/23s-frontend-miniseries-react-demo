@@ -29,28 +29,29 @@ function App() {
     db.createTask(newTask);
   };
 
-  const deleteTask = (index) => {
+  const deleteTask = (id) => {
     // setTasks((prevTasks) => {
     //   const newTasks = {...prevTasks};
     //   delete newTasks[index];
     //   return newTasks;
     // });
-    db.deleteTask(index);
+    db.deleteTask(id);
   };
 
   const updateTask = (updatedTask, id) => {
     // from realtime!
-    // setTasks((prevTasks) => ({...prevTasks, [String(index)]: updatedTask}));
+    // setTasks((prevTasks) => ({...prevTasks, [String(id)]: updatedTask}));
+
     db.updateTask(id, updatedTask);
   };
 
-  const toggleTask = (index, updatedTask) => {
-    setTasks((prevTasks) => ({
-          ...prevTasks, 
-          [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
+  const toggleTask = (index, value) => {
+    // setTasks((prevTasks) => ({
+    //       ...prevTasks, 
+    //       [id]: prevTasks[id] ? {...prevTasks[id], completed: value} : undefined,
       
-    }));
-    db.updateTask(index, updatedTask);
+    // }));
+    db.updateTask(index, {completed: value});
   };
 
   return (
@@ -59,8 +60,8 @@ function App() {
       <TaskForm onSubmit={addTask} />
     <ul>
       {Object.entries(tasks).map((entry) => {
-        const [index, task] = entry; 
-        return <Task key={index} index={index} task={task} onUpdate={updateTask} toggleTask={toggleTask} onDelete={deleteTask} />})
+        const [id, task] = entry; 
+        return <Task key={id} index={id} task={task} onUpdate={updateTask} toggleTask={() => { toggleTask(id, !task.completed)}} onDelete={deleteTask} />})
         }
     </ul>
     </div>
