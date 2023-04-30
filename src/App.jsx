@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import './App.css';
 
 import TaskForm from './components/TaskForm';
@@ -45,13 +45,13 @@ function App() {
     db.updateTask(id, updatedTask);
   };
 
-  const toggleTask = (index, value) => {
+  const toggleTask = (id, completed) => {
     // setTasks((prevTasks) => ({
     //       ...prevTasks, 
     //       [id]: prevTasks[id] ? {...prevTasks[id], completed: value} : undefined,
       
     // }));
-    db.updateTask(index, {completed: value});
+    db.updateTask(id, {completed});
   };
 
   return (
