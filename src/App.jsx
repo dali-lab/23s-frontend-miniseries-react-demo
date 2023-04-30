@@ -49,7 +49,6 @@ function App() {
     // setTasks((prevTasks) => ({
     //       ...prevTasks, 
     //       [id]: prevTasks[id] ? {...prevTasks[id], completed} : undefined,
-      
     // }));
     db.updateTask(id, {completed});
   };

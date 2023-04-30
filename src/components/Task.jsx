@@ -5,6 +5,9 @@ function Task(props) {
   const [editValue, setEditValue] = useState(task.text);
   const [isEditing, setIsEditing] = useState(false);
 
+  console.log(task.completed);
+
+
   const handleEditSubmit = (index) => {
     onUpdate({...task, text: editValue}, index);
     setIsEditing(false);
@@ -17,7 +20,7 @@ function Task(props) {
       className={task.completed ? 'completed' : ''}
       data-index={index}
     >
-      <input type="checkbox" value={task.completed} onClick={() => { if (!isEditing) toggleTask(index, !task.completed) }}></input>
+      <input type="checkbox" value={task.completed} onClick={() => { toggleTask(index, !task.completed) }}></input>
       {isEditing ? (
         <>
           <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
