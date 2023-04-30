@@ -4,10 +4,9 @@ function Task(props) {
   const { index, task, onUpdate, onDelete, toggleTask } = props
   const [editValue, setEditValue] = useState(task.text);
   const [isEditing, setIsEditing] = useState(false);
-  const [prevCompletionState, setPrevCompletionState] = useState(task.completed);
 
   const handleEditSubmit = (index) => {
-    onUpdate({...task, completed: prevCompletionState, text: editValue}, index);
+    onUpdate({...task, text: editValue}, index);
     setIsEditing(false);
   };
 
@@ -28,7 +27,7 @@ function Task(props) {
         <>
           <div className="text">{task.text}</div>
           <div className="edit-buttons">
-            <button onClick={() => { setPrevCompletionState(task.completed); setIsEditing(index);}}>Edit</button>
+            <button onClick={() => {setIsEditing(index);}}>Edit</button>
             <button onClick={() => onDelete(index)}>Delete</button>
           </div>
         </>
