@@ -27,17 +27,11 @@ function App() {
   };
 
   const toggleTask = (index) => {
-    if (tasks) {
-      setTasks((prevTasks) => {
-        if (prevTasks[index]) {
-          return {
-            ...prevTasks, 
-            [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
-        } 
-      } else {
-        return prevTasks;
-      }});
-    }
+    setTasks((prevTasks) => ({
+          ...prevTasks, 
+          [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
+      
+    }));
   };
 
   return (
