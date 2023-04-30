@@ -6,7 +6,7 @@ import Task from './components/Task';
 import { TaskContext } from './Root';
 
 function App() {
-  const [ tasks, setTasks ] = useState(TaskContext);
+  const { tasks, setTasks } = useContext(TaskContext);
   const [ newTaskId, setNewTaskId ] = useState(0);
   
   const addTask = (task) => {
