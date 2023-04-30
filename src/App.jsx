@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     db.fetchTasks((newTasks) => {
       console.log(newTasks);
-      setTasks(newTasks);
+      setTasks(newTasks ? newTasks : {});
     });
   }, [setTasks]);
   
@@ -29,12 +29,13 @@ function App() {
     db.createTask(newTask);
   };
 
-  const deleteTask = (id) => {
-    setTasks((prevTasks) => {
-      const newTasks = {...prevTasks};
-      delete newTasks[id];
-      return newTasks;
-    });
+  const deleteTask = (index) => {
+    // setTasks((prevTasks) => {
+    //   const newTasks = {...prevTasks};
+    //   delete newTasks[index];
+    //   return newTasks;
+    // });
+    db.deleteTask(index);
   };
 
   const updateTask = (updatedTask, id) => {
@@ -43,13 +44,13 @@ function App() {
     db.updateTask(id, updatedTask);
   };
 
-  const toggleTask = (id) => {
-    // setTasks((prevTasks) => ({
-    //       ...prevTasks, 
-    //       [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
+  const toggleTask = (index, updatedTask) => {
+    setTasks((prevTasks) => ({
+          ...prevTasks, 
+          [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
       
-    // }));
-    db.updateTask(id, {completed: !tasks[id].completed});
+    }));
+    db.updateTask(index, updatedTask);
   };
 
   return (
