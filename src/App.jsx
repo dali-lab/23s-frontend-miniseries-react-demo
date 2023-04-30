@@ -48,7 +48,7 @@ function App() {
   const toggleTask = (id, completed) => {
     // setTasks((prevTasks) => ({
     //       ...prevTasks, 
-    //       [id]: prevTasks[id] ? {...prevTasks[id], completed: value} : undefined,
+    //       [id]: prevTasks[id] ? {...prevTasks[id], completed} : undefined,
       
     // }));
     db.updateTask(id, {completed});
