@@ -14,22 +14,22 @@ function App() {
     setNewTaskId((prevNewTaskId) => prevNewTaskId + 1);
   };
 
-  const deleteTask = (index) => {
+  const deleteTask = (id) => {
     setTasks((prevTasks) => {
       const newTasks = {...prevTasks};
-      delete newTasks[index];
+      delete newTasks[id];
       return newTasks;
     });
   };
 
-  const updateTask = (updatedTask, index) => {
-    setTasks((prevTasks) => ({...prevTasks, [String(index)]: updatedTask}));
+  const updateTask = (updatedTask, id) => {
+    setTasks((prevTasks) => ({...prevTasks, [String(id)]: updatedTask}));
   };
 
-  const toggleTask = (index) => {
+  const toggleTask = (id, value) => {
     setTasks((prevTasks) => ({
           ...prevTasks, 
-          [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
+          [id]: prevTasks[id] ? {...prevTasks[id], completed: value} : undefined,
       
     }));
   };
@@ -40,8 +40,8 @@ function App() {
       <TaskForm onSubmit={addTask} />
     <ul>
       {Object.entries(tasks).map((entry) => {
-        const [index, task] = entry; 
-        return <Task key={index} index={index} task={task} onUpdate={updateTask} toggleTask={toggleTask} onDelete={deleteTask} />})
+        const [id, task] = entry; 
+        return <Task key={id} index={id} task={task} onUpdate={updateTask} toggleTask={() => { toggleTask(id, !task.completed)}} onDelete={deleteTask} />})
         }
     </ul>
     </div>
