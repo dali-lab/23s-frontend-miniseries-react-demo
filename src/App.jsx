@@ -26,10 +26,10 @@ function App() {
     setTasks((prevTasks) => ({...prevTasks, [String(id)]: updatedTask}));
   };
 
-  const toggleTask = (id, value) => {
+  const toggleTask = (id, completed) => {
     setTasks((prevTasks) => ({
           ...prevTasks, 
-          [id]: prevTasks[id] ? {...prevTasks[id], completed: value} : undefined,
+          [id]: prevTasks[id] ? {...prevTasks[id], completed } : undefined,
       
     }));
   };
