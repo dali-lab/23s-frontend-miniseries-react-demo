@@ -15,10 +15,10 @@ function Task(props) {
     <li 
       key={index}
       // Toggling
-      onClick={() => { if (!isEditing) toggleTask(index) }}
       className={task.completed ? 'completed' : ''}
       data-index={index}
     >
+      <input type="checkbox" value={task.completed} onClick={() => { if (!isEditing) toggleTask(index) }}></input>
       {isEditing ? (
         <>
           <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} />

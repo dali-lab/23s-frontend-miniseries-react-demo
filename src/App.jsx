@@ -29,10 +29,10 @@ function App() {
     db.createTask(newTask);
   };
 
-  const deleteTask = (index) => {
+  const deleteTask = (id) => {
     setTasks((prevTasks) => {
       const newTasks = {...prevTasks};
-      delete newTasks[index];
+      delete newTasks[id];
       return newTasks;
     });
   };
@@ -44,18 +44,11 @@ function App() {
   };
 
   const toggleTask = (id) => {
-    // if (tasks) {
-    //   setTasks((prevTasks) => {
-    //     if (prevTasks[id]) {
-    //       return {
-    //         ...prevTasks, 
-    //         [id]: prevTasks[id] ? {...prevTasks[id], completed: !prevTasks[id].completed} : undefined,
-    //     } 
-    //   } else {
-    //     return prevTasks;
-    //   }});
-    // }
-
+    // setTasks((prevTasks) => ({
+    //       ...prevTasks, 
+    //       [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
+      
+    // }));
     db.updateTask(id, {completed: !tasks[id].completed});
   };
 
