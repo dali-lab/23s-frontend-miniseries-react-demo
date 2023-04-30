@@ -1,49 +1,55 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import './App.css';
 
 import TaskForm from './components/TaskForm';
-import TaskList from './components/TaskList';
+import Task from './components/Task';
 import { TaskContext } from './Root';
 
 function App() {
   const { tasks, setTasks } = useContext(TaskContext);
-
+  const [ newTaskId, setNewTaskId ] = useState(0);
+  
   const addTask = (task) => {
-    const newTask = { text: task, completed: false };
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTasks((prevTasks) => ({...prevTasks, [String(newTaskId)]: { text: task, completed: false, id:  String(newTaskId)}}));
+    setNewTaskId((prevNewTaskId) => prevNewTaskId + 1);
   };
 
   const deleteTask = (index) => {
-    setTasks((prevTasks) => prevTasks.filter((_, i) => i !== index));
+    setTasks((prevTasks) => {
+      const newTasks = {...prevTasks};
+      delete newTasks[index];
+      return newTasks;
+    });
   };
 
-  const updateTask = (newTask, index) => {
-    setTasks((prevTasks) => {
-      return prevTasks.map((task, i) => (i === index ? { text: newTask, completed: false } : task));
-    });
+  const updateTask = (updatedTask, index) => {
+    setTasks((prevTasks) => ({...prevTasks, [String(index)]: updatedTask}));
   };
 
   const toggleTask = (index) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task, i) =>
-        i === index ? { ...task, completed: !task.completed } : task
-      )
-    );
+    if (tasks) {
+      setTasks((prevTasks) => {
+        if (prevTasks[index]) {
+          return {
+            ...prevTasks, 
+            [String(index)]: prevTasks[String(index)] ? {...prevTasks[index], completed: !prevTasks[index].completed} : undefined,
+        } 
+      } else {
+        return prevTasks;
+      }});
+    }
   };
-
-  const swapTask = (index, newIndex) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks];
-      updatedTasks.splice(index, 0, updatedTasks.splice(newIndex, 1)[0]);
-      return updatedTasks;
-    });
-  }
 
   return (
     <div className="App">
       <h1>Simple To-Do List</h1>
       <TaskForm onSubmit={addTask} />
-      <TaskList tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} onToggle={toggleTask} swapTask={swapTask} />
+    <ul>
+      {Object.entries(tasks).map((entry) => {
+        const [index, task] = entry; 
+        return <Task key={index} index={index} task={task} onUpdate={updateTask} toggleTask={toggleTask} onDelete={deleteTask} />})
+        }
+    </ul>
     </div>
   );
 }

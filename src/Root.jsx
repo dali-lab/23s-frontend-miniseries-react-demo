@@ -4,7 +4,7 @@ import { createContext, useState } from 'react';
 export const TaskContext = createContext();
 
 export default function Root() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState({});
   
   return (
     <TaskContext.Provider value={{ tasks, setTasks }}>
