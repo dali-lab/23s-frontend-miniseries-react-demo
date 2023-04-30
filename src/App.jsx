@@ -3,9 +3,10 @@ import './App.css';
 
 import TaskForm from './components/TaskForm';
 import Task from './components/Task';
+import { TaskContext } from './Root';
 
 function App() {
-  const [ tasks, setTasks ] = useState({});
+  const [ tasks, setTasks ] = useState(TaskContext);
   const [ newTaskId, setNewTaskId ] = useState(0);
   
   const addTask = (task) => {
