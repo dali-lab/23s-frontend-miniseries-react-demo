@@ -7,13 +7,11 @@ import 'firebase/compat/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAmrewQqSzygLgHYX56Xxu-NmCUHwpoCvI",
-  authDomain: "to-do-list-e112b.firebaseapp.com",
-  databaseURL: "https://to-do-list-e112b-default-rtdb.firebaseio.com",
-  projectId: "to-do-list-e112b",
-  storageBucket: "to-do-list-e112b.appspot.com",
-  messagingSenderId: "487810261722",
-  appId: "1:487810261722:web:c11bd975ed4bb70aea7be3"
+    apiKey: '<your-api-key>',
+    authDomain: '<your-auth-domain>',
+    databaseURL: '<your-database-url>',
+    storageBucket: '<your-storage-bucket>',
+    projectId: '<your-project-id>',
 };
 
 // Initialize Firebase
