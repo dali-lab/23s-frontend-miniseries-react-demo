@@ -10,7 +10,7 @@ function About() {
 
     try {
       const response = await axios.get('https://cataas.com/cat?json=true');
-      const imageUrl = `https://cataas.com${response.data.url}`;
+      const imageUrl = `https://cataas.com/cat/${response.data._id}`;
       setCatImage(imageUrl);
     } catch (error) {
       console.error('Error fetching cat image:', error);
